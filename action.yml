@@ -7,7 +7,7 @@ runs:
         echo ${GITHUB_HEAD_REF}
         if ! [[ "$(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
           exit 1
-        elseif [[ "$(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)" == "hotfix" && $(echo ${GITHUB_HEAD_REF}) =~ (master|main) ]]; then
+        elseif [[ "$(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)" == "hotfix"  ]]; then
           exit 1
         fi 
       shell: bash
