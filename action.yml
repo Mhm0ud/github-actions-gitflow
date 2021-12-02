@@ -1,0 +1,9 @@
+name: 'Check Branch Name'
+description: 'check the name convention of the branch'
+runs:
+  using: "composite"
+  steps:
+    - run: echo $(echo ${GITHUB_REF#refs/heads/})
+      shell: bash
+    - run: ${{ github.action_path }}/script.sh
+      shell: bash
