@@ -3,5 +3,5 @@ description: 'check the name convention of the branch'
 runs:
   using: "composite"
   steps:
-    - run: echo $(echo ${GITHUB_REF#refs/heads/})
+    - run: echo $(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)
       shell: bash
