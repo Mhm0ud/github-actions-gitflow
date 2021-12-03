@@ -1,22 +1,19 @@
 name: 'Check Branch Name'
-description: 'check the name convention of the branch'
+description: 'check the naming convention of the pull request head branch'
 runs:
   using: "composite"
   steps:
     - run: |
-        echo "1 $GITHUB_REF" 
-        echo "2 $GITHUB_BASE_REF"
-        echo "3  $GITHUB_HEAD_REF"
-        echo ${GITHUB_HEAD_REF} | cut -d "/" -f1
-        echo ${GITHUB_HEAD_REF} | cut -d "/" -f2
         if ! [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
-          echo "not pass one"
+          echo "Your branch name is not start with on of the following accepting criteria: feature/, hotfix/, bugfix, and release/"
           exit 1
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" == "hotfix" && ! "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
-          echo "not pass two"
+          echo "it's a hotfix but your base branch is not the master or main, you can't do a hotfix for any other branch"
           exit 1
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix) && ! "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f2)" =~ [A-Z]+-[0-9]+ ]]; then
-          echo "not pass three"
+          echo "Your PR is not connected to an issue on Jira, please create an issur for it."
           exit 1
+        else
+          echo "Your branch name is correct."
         fi 
       shell: bash
