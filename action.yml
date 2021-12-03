@@ -10,10 +10,7 @@ runs:
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" == "hotfix" && ! "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
           echo "it's a hotfix but your base branch is not the master or main, you can't do a hotfix for any other branch"
           exit 1
-        elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix) && ! "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f2)" =~ [A-Z]+-[0-9]+ ]]; then
-          echo "Your PR is not connected to an issue on Jira, please create an issur for it."
-          exit 1
         else
-          echo "Your branch name is correct."
+          echo "Your branch name is follow the gitflow naming convention."
         fi 
       shell: bash
