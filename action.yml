@@ -4,7 +4,9 @@ runs:
   using: "composite"
   steps:
     - run: |
-        echo ${GITHUB_HEAD_REF}
+        echo $GITHUB_REF 
+        echo $GITHUB_BASE_REF
+        echo $GITHUB_HEAD_REF
         if ! [[ "$(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
           exit 1
         elif [[ "$(echo ${GITHUB_REF#refs/heads/} | cut -d "/" -f1)" == "hotfix" && $(echo ${GITHUB_HEAD_REF}) =~ (master|main) ]]; then
