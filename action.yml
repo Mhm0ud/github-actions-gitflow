@@ -9,7 +9,7 @@ runs:
         echo "3  $GITHUB_HEAD_REF"
         if ! [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
           exit 1
-        elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" != "hotfix" && "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
+        elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" == "hotfix" && ! "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
           exit 1
         fi 
       shell: bash
