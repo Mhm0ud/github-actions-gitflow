@@ -7,11 +7,16 @@ runs:
         echo "1 $GITHUB_REF" 
         echo "2 $GITHUB_BASE_REF"
         echo "3  $GITHUB_HEAD_REF"
+        echo ${GITHUB_HEAD_REF} | cut -d "/" -f1
+        echo ${GITHUB_HEAD_REF} | cut -d "/" -f2
         if ! [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
+          echo "not pass one"
           exit 1
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" == "hotfix" && ! "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
+          echo "not pass two"
           exit 1
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix) && ! "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f2)" =~ '[A-Z]+-[0-9]+' ]]; then
+          echo "not pass three"
           exit 1
         fi 
       shell: bash
