@@ -1,5 +1,5 @@
 name: 'Check Branch Name'
-description: 'check the naming convention of the pull request head branch'
+description: 'check the naming convention of the pull request head branch if it follows the gitflow naming convention'
 runs:
   using: "composite"
   steps:
