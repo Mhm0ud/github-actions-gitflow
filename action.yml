@@ -1,5 +1,6 @@
 name: 'Check Branch Name'
 description: 'check the naming convention of the pull request head branch if it follows the gitflow naming convention'
+author: 'Mahmoud Almasri'
 runs:
   using: "composite"
   steps:
@@ -14,3 +15,6 @@ runs:
           echo "Your branch name is follow the gitflow naming convention."
         fi 
       shell: bash
+branding:
+  icon: 'git-branch'  
+  color: 'orange'
