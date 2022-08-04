@@ -1,18 +1,18 @@
 name: 'Check Branch Name'
-description: 'check the naming convention of the pull request head branch if it follows the gitflow naming convention'
+description: 'check the pull request branch name follows the gitflow naming convention'
 author: 'Mahmoud Almasri'
 runs:
   using: "composite"
   steps:
     - run: |
         if ! [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" =~ (feature|hotfix|bugfix|release) ]]; then
-          echo "Your branch name is not start with on of the following accepting criteria: feature/, hotfix/, bugfix, and release/"
+          echo "Your branch name does not start with one of the following: feature/, hotfix/, bugfix, or release/."
           exit 1
         elif [[ "$(echo ${GITHUB_HEAD_REF} | cut -d "/" -f1)" == "hotfix" && ! "$(echo ${GITHUB_BASE_REF})" =~ (master|main) ]]; then
-          echo "it's a hotfix but your base branch is not the master or main, you can't do a hotfix for any other branch"
+          echo "Your branch is a hotfix, but your base branch is not master or main; you can't hotfix any other branch."
           exit 1
         else
-          echo "Your branch name is follow the gitflow naming convention."
+          echo "Your branch name follows the gitflow naming convention."
         fi 
       shell: bash
 branding:
