@@ -15,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to test branch name
     steps:
-      - uses: knawat/github-actions-gitflow@v1
+      - uses: mhm0ud/github-actions-gitflow@v1
 ```
